@@ -34,9 +34,25 @@ function leerDatosCurso(curso) {
     cantidad: 1,
   };
 
-  // Agrega elementos al arreglo articulosCarrito
-  articulosCarrito = [...articulosCarrito, infoCurso];
-  console.log(articulosCarrito);
+  // Revisa si un elemento ya existe en el carrito
+  const existe = articulosCarrito.some((curso) => curso.id === infoCurso.id);
+  if (existe) {
+    // Actializamos la cantidad
+    const cursos = articulosCarrito.map((curso) => {
+      if (curso.id === infoCurso.id) {
+        curso.cantidad++;
+        return curso; // retorna el objeto actualizado
+      } else {
+        return curso; // retorna los objetos que no son los duplicados
+      }
+    });
+    articulosCarrito = [...cursos];
+  } else {
+    // Agregamos el curso al carrito
+    // Agrega elementos al arreglo articulosCarrito
+    articulosCarrito = [...articulosCarrito, infoCurso];
+    console.log(articulosCarrito);
+  }
 
   carritoHTML();
 }
